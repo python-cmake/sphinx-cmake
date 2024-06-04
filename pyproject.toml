@@ -9,7 +9,7 @@ backend-path = ["."]
 
 [project]
 name = "sphinx-cmake"
-version = "0.1.0"
+version = "0.1.1"
 description = "Provide CMake module for Sphinx"
 readme = "README.md"
 requires-python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*, <4"
