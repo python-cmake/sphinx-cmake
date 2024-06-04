@@ -1,0 +1,57 @@
+# cmake artifacts
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+cmake-build-*/
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# virtualenv
+venv/
+ENV/
+
+# Caches
+Thumbs.db
+
+# Development
+.project
+.pydevproject
+.settings
+.idea/
+.history/
+
+# Unit test / coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+*,cover
+.pytest_cache/
