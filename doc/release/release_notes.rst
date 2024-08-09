@@ -4,6 +4,12 @@
 Release Notes
 *************
 
+.. release:: Upcoming
+
+    .. change:: new
+
+        Added compatibility with Sphinx v8 and CMake 3.30.
+
 .. release:: 0.1.1
     :date: 2024-06-04
 

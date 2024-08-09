@@ -16,10 +16,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sphinx: [ "5", "6", "7" ]
-        cmake: [ "3.20", "3.29" ]
+        sphinx: [ "5", "6", "7", "8" ]
+        cmake: [ "3.20", "3.30" ]
         os: [ "ubuntu", "macos", "windows" ]
         python: [ "3.8", "3.11", "3.12" ]
+        exclude:
+          - sphinx: "8"
+            python: "3.8"
 
     name: |
       v${{ matrix.sphinx }}-${{ matrix.cmake }}
