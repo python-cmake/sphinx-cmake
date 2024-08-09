@@ -4,7 +4,8 @@
 Release Notes
 *************
 
-.. release:: Upcoming
+.. release:: 0.2.0
+    :date: 2024-08-09
 
     .. change:: new
 
