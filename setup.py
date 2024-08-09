@@ -9,7 +9,7 @@ import subprocess
 
 
 ROOT = os.path.dirname(os.path.realpath(__file__))
-DEPENDENCIES = ["sphinx >= 1, < 8"]
+DEPENDENCIES = ["sphinx >= 1, < 9"]
 
 
 class CreateCmakeConfig(install):

@@ -19,7 +19,7 @@ authors = [
     {name = "Jeremy Retailleau", email = "jeremy.retailleau@gmail.com" }
 ]
 dependencies = [
-    "sphinx >= 1, < 8",
+    "sphinx >= 1, < 9",
 ]
 classifiers = [
     "Intended Audience :: Developers",
