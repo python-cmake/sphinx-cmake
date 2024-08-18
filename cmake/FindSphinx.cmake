@@ -54,13 +54,15 @@ if (Sphinx_FOUND AND NOT TARGET Sphinx::Build)
         cmake_parse_arguments(
             PARSE_ARGV 1 ""
             "ALL;SHOW_TRACEBACK;WRITE_ALL;FRESH_ENV;ISOLATED"
-            "BUILDER;CONFIG_DIRECTORY;SOURCE_DIRECTORY;OUTPUT_DIRECTORY"
+            "COMMENT;BUILDER;CONFIG_DIRECTORY;SOURCE_DIRECTORY;OUTPUT_DIRECTORY"
             "DEFINE;DEPENDS")
 
         # Ensure that target should be added to the default build target,
         # if required.
         if(_ALL)
-            set(_ALL ALL)
+            set(_ALL "ALL")
+        else()
+            set(_ALL "")
         endif()
 
         # Default working directory to current source path if none is provided.

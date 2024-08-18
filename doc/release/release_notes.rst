@@ -4,6 +4,17 @@
 Release Notes
 *************
 
+.. release:: Upcoming
+
+    .. change:: fixed
+
+        Fixed the :func:`sphinx_add_docs` to prevent setting incorrect
+        attribute when the "ALL" option is not set.
+
+    .. change:: fixed
+
+        Fixed the :func:`sphinx_add_docs` to add missing "COMMENT" option.
+
 .. release:: 0.2.0
     :date: 2024-08-09
 
