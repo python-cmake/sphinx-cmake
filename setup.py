@@ -60,7 +60,7 @@ class CreateCmakeConfig(install):
 
 setup(
     name="sphinx-cmake",
-    version="0.2.1",
+    version="0.2.2",
     data_files=[
         (
             "share/Sphinx/cmake",
