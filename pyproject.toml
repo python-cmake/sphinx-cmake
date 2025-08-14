@@ -7,7 +7,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "sphinx-cmake"
-version = "0.2.2"
+version = "1.0.0"
 description = "Provide CMake module for Sphinx"
 readme = "README.md"
 requires-python = ">=3.7, <4"
