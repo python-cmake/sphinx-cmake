@@ -4,6 +4,12 @@
 Release Notes
 *************
 
+.. release:: Upcoming
+
+    .. change:: fixed
+
+        Added manual docs deployment trigger and updated GitHub Pages actions.
+
 .. release:: 1.0.0
     :date: 2025-08-14
 
