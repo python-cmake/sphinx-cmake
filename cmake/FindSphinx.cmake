@@ -50,12 +50,39 @@ if (Sphinx_FOUND AND NOT TARGET Sphinx::Build)
         PROPERTIES
             IMPORTED_LOCATION "${SPHINX_EXECUTABLE}")
 
+    # Helper function to register a Sphinx documentation target.
     function(sphinx_add_docs NAME)
+        set(_BOOL_ARGS
+            ALL
+            SHOW_TRACEBACK
+            WRITE_ALL
+            FRESH_ENV
+            ISOLATED
+        )
+
+        set(_SINGLE_VALUE_ARGS
+            COMMENT
+            BUILDER
+            CONFIG_DIRECTORY
+            SOURCE_DIRECTORY
+            OUTPUT_DIRECTORY
+            WORKING_DIRECTORY
+        )
+
+        set(_MULTI_VALUE_ARGS
+            DEFINE
+            DEPENDS
+            LIBRARY_PATH_PREPEND
+            PYTHON_PATH_PREPEND
+            ENVIRONMENT
+        )
+
         cmake_parse_arguments(
             PARSE_ARGV 1 ""
-            "ALL;SHOW_TRACEBACK;WRITE_ALL;FRESH_ENV;ISOLATED"
-            "COMMENT;BUILDER;CONFIG_DIRECTORY;SOURCE_DIRECTORY;OUTPUT_DIRECTORY"
-            "DEFINE;DEPENDS")
+            "${_BOOL_ARGS}"
+            "${_SINGLE_VALUE_ARGS}"
+            "${_MULTI_VALUE_ARGS}"
+        )
 
         # Ensure that target should be added to the default build target,
         # if required.
@@ -64,6 +91,61 @@ if (Sphinx_FOUND AND NOT TARGET Sphinx::Build)
         else()
             set(_ALL "")
         endif()
+
+        # Set platform-specific library path environment variable.
+        if (CMAKE_SYSTEM_NAME STREQUAL Windows)
+            set(LIBRARY_ENV_NAME PATH)
+        elseif (CMAKE_SYSTEM_NAME STREQUAL Darwin)
+            set(LIBRARY_ENV_NAME DYLD_LIBRARY_PATH)
+        else()
+            set(LIBRARY_ENV_NAME LD_LIBRARY_PATH)
+        endif()
+
+        # Convert paths to CMake-friendly format.
+        if(DEFINED ENV{${LIBRARY_ENV_NAME}})
+            cmake_path(CONVERT "$ENV{${LIBRARY_ENV_NAME}}" TO_CMAKE_PATH_LIST LIBRARY_PATH)
+        else()
+            set(LIBRARY_PATH "")
+        endif()
+        if(DEFINED ENV{PYTHONPATH})
+            cmake_path(CONVERT "$ENV{PYTHONPATH}" TO_CMAKE_PATH_LIST PYTHON_PATH)
+        else()
+            set(PYTHON_PATH "")
+        endif()
+
+        # Prepend specified paths to the library and Python paths.
+        if (_LIBRARY_PATH_PREPEND)
+            list(PREPEND LIBRARY_PATH ${_LIBRARY_PATH_PREPEND})
+        endif()
+
+        if (_PYTHON_PATH_PREPEND)
+            list(PREPEND PYTHON_PATH ${_PYTHON_PATH_PREPEND})
+        endif()
+
+        # Build environment arguments for cmake -E env.
+        set(_env_args "")
+
+        if (LIBRARY_PATH)
+            if (CMAKE_SYSTEM_NAME STREQUAL Windows)
+                list(JOIN LIBRARY_PATH "\\;" _LIBRARY_PATH_STRING)
+            else()
+                list(JOIN LIBRARY_PATH ":" _LIBRARY_PATH_STRING)
+            endif()
+            list(APPEND _env_args "${LIBRARY_ENV_NAME}=${_LIBRARY_PATH_STRING}")
+        endif()
+
+        if (PYTHON_PATH)
+            if (CMAKE_SYSTEM_NAME STREQUAL Windows)
+                list(JOIN PYTHON_PATH "\\;" _PYTHON_PATH_STRING)
+            else()
+                list(JOIN PYTHON_PATH ":" _PYTHON_PATH_STRING)
+            endif()
+            list(APPEND _env_args "PYTHONPATH=${_PYTHON_PATH_STRING}")
+        endif()
+
+        foreach(_env ${_ENVIRONMENT})
+            list(APPEND _env_args "${_env}")
+        endforeach()
 
         # Default working directory to current source path if none is provided.
         if (NOT _WORKING_DIRECTORY)
@@ -128,7 +210,6 @@ if (Sphinx_FOUND AND NOT TARGET Sphinx::Build)
             COMMENT ${_COMMENT}
             DEPENDS ${_DEPENDS}
             COMMAND ${CMAKE_COMMAND} -E make_directory ${_OUTPUT_DIRECTORY}
-            COMMAND Sphinx::Build ${_args}
-            COMMAND_EXPAND_LISTS)
+            COMMAND ${CMAKE_COMMAND} -E env ${_env_args} "${SPHINX_EXECUTABLE}" ${_args})
     endfunction()
 endif()

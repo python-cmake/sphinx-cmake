@@ -21,6 +21,9 @@ API Reference
             [OUTPUT_DIRECTORY dir]
             [DEFINE setting1=value1 setting2=value2...]
             [DEPENDS target1 target2...]
+            [LIBRARY_PATH_PREPEND path1 path2...]
+            [PYTHON_PATH_PREPEND path1 path2...]
+            [ENVIRONMENT env1 env2...]
             [SHOW_TRACEBACK]
             [WRITE_ALL]
             [FRESH_ENV]
@@ -119,6 +122,50 @@ API Reference
                 ...
                 DEPENDS lib1 lib2
             )
+
+    * ``LIBRARY_PATH_PREPEND``
+
+        List of library paths to prepend to the corresponding environment
+        variable (:envvar:`LD_LIBRARY_PATH` on Linux,
+        :envvar:`DYLD_LIBRARY_PATH` on macOS, and :envvar:`PATH` on Windows)
+        when building the documentation. Each path can be defined literally or
+        as a CMake expression generator for convenience::
+
+            sphinx_add_docs(
+                ...
+                LIBRARY_PATH_PREPEND
+                    $<TARGET_FILE_DIR:lib1>
+                    $<TARGET_FILE_DIR:lib2>
+                    /path/to/libs/
+            )
+
+    * ``PYTHON_PATH_PREPEND``
+
+        List of Python paths to prepend to the :envvar:`PYTHONPATH` environment
+        variable when building the documentation. Each path can be defined
+        literally or as a CMake expression generator for convenience::
+
+            sphinx_add_docs(
+                ...
+                PYTHON_PATH_PREPEND
+                    $<TARGET_FILE_DIR:lib1>
+                    $<TARGET_FILE_DIR:lib2>
+                    /path/to/python/
+            )
+
+    * ``ENVIRONMENT``
+
+        List of custom environment variables with associated values to set when
+        building the documentation::
+
+            sphinx_add_docs(
+                ...
+                ENVIRONMENT
+                    "ENV_VAR1=VALUE1"
+                    "ENV_VAR2=VALUE2"
+                    "ENV_VAR3=VALUE3"
+            )
+
 
     * ``SHOW_TRACEBACK``
 

@@ -4,6 +4,13 @@
 Release Notes
 *************
 
+.. release:: Upcoming
+
+    .. change:: new
+
+        Added support for prepending library and Python paths, and for passing
+        arbitrary environment variables to Sphinx builds.
+
 .. release:: 1.0.1
     :date: 2025-08-14
 
