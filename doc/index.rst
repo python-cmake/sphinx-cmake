@@ -14,6 +14,7 @@ Generate documentation for :term:`Sphinx` with :term:`CMake`.
     integration
     tutorial
     api_reference
+    environment_variables
     release/index
     Source Code @ GitHub <https://github.com/python-cmake/sphinx-cmake>
     glossary
