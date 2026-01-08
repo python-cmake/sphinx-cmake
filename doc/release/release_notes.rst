@@ -11,6 +11,19 @@ Release Notes
         Added support for prepending library and Python paths, and for passing
         arbitrary environment variables to Sphinx builds.
 
+    .. change:: new
+
+        Added compatibility with Sphinx v9 and CMake 4.2.
+
+    .. change:: changed
+
+        Updated :term:`CMake` packaging by simplifying
+        `SphinxConfigVersion.cmake` so that version compatibility is no longer
+        fixed at build time. Version discovery and validation are handled
+        dynamically by `FindSphinx.cmake`, with `SphinxConfig.cmake` serving
+        only as a thin entry point for :term:`CMake` package discovery.
+        Wheel distribution is fully supported and recommended.
+
 .. release:: 1.0.1
     :date: 2025-08-14
 

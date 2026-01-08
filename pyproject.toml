@@ -1,7 +1,7 @@
 [build-system]
 requires = [
     "hatchling >= 1.4",
-    "cmake >= 3.20, < 4.2"
+    "cmake >= 3.20, < 4.3"
 ]
 build-backend = "hatchling.build"
 
@@ -17,7 +17,7 @@ authors = [
     {name = "Jeremy Retailleau", email = "jeremy.retailleau@gmail.com" }
 ]
 dependencies = [
-    "sphinx >= 1, < 9",
+    "sphinx >= 1, < 10",
 ]
 classifiers = [
     "Intended Audience :: Developers",
@@ -31,6 +31,7 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
 ]
 
 [project.urls]
